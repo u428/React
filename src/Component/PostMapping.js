@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
 const api = axios.create({
     baseURL: 'http://localhost:5050/user'
 })
@@ -47,11 +46,8 @@ export default class PostMapping extends React.Component{
 
     
     changeHandler =(e) =>{
-        if(this.state.[e.target.name].length < 10){
-            if(e.target.value !== '1'){
-                this.setState({[e.target.name]: e.target.value})
-                console.log(e.target)
-            }
+        if(e.target.value !== '1'){
+            this.setState({[e.target.name]: e.target.value.substr(0, 20)})
         }
     }
 
@@ -62,7 +58,7 @@ export default class PostMapping extends React.Component{
         const addresses = this.state.address;
 
         if(firstNames.length > 0 && lastNames.length > 0 && addresses.length > 0){
-            api.post('/post', {firstName: firstNames , lastName: lastNames, address: addresses}).then(res => console.log(res));
+            api.post('/post', {firstName: firstNames , lastName: lastNames, address: addresses});
             this.setState({
                 idCard: '',
                 firstName: "",
@@ -94,29 +90,29 @@ export default class PostMapping extends React.Component{
         const {firstName, lastName, address} = this.state;
 
         return(
-            <div>
-                <form onSubmit={this.props.match.params.idCard ? this.updateHandler : this.submotHandler }>
-                    <div>
-                        <input type="test" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter your firstName" />
-                    </div>
+            <div className="container mt-3">
+                <div className="justify-content-center">
+                    <form action="/list" onSubmit={this.props.match.params.idCard ? this.updateHandler : this.submotHandler }>
+                        <div className="form-group form-group-lg">
+                            <input className="form-control" type="test" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter your firstName" />
+                        </div>
 
-                    <div>
-                        <input type="text" name="lastName" value={lastName} onChange={this.changeHandler} placeholder="Enter your lastname" />
-                    </div>
+                        <div className="form-group form-group-sm">
+                            <input className="form-control" type="text" name="lastName" value={lastName} onChange={this.changeHandler} placeholder="Enter your lastname" />
+                        </div>
 
-                    <div>
-                        <input type="text" name="address" value={address} onChange={this.changeHandler} placeholder="Enter your address" />
-                    </div>
-                    <div>
-                        <input type="text" name="idcard" value={this.state.idCard} onChange={this.changeHandler} hidden></input>
-                    </div>
-                    <div>
-                        
-                        <button type="submit">Submit</button>
-                        
-                    </div>
-                </form>
-
+                        <div className="form-group form-group-sm">
+                            <input className="form-control col-cover-fill" type="text" name="address" value={address} onChange={this.changeHandler} placeholder="Enter your address" />
+                        </div>
+                        <div className="form-group form-group">
+                            <input type="text" name="idcard" value={this.state.idCard} onChange={this.changeHandler} hidden></input>
+                        </div>
+                        <div>
+                            <button  className="btn btn-info btn-sm btn-block" type="submit" to="/list" >Submit</button>
+                            {/* <Link className="btn btn-info btn-sm" type="submit" to="/list">Submit</Link> */}
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

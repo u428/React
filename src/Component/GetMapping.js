@@ -9,11 +9,16 @@ const api = axios.create({
 export default class GetMapping extends React.Component{
 
     state = {
-            person: []
+            person: [],
+            search:''
         }
 
     componentDidMount(){
         this.getPeople();
+    }
+
+    updateSeach =(e)=>{
+        this.setState({search: e.target.value.substr(0,10)});
     }
 
     getPeople = async () =>{
@@ -21,22 +26,30 @@ export default class GetMapping extends React.Component{
             .then(res => {
                 const persons = res.data;
                 this.setState({person: persons});
-                console.log(persons);
             })
     }
 
 
     deletePeople =async (idCard) =>{
-        let data =await api.delete('/'+idCard)
-        console.log(data);
+        await api.delete('/'+idCard)
         this.getPeople();
     }
 
 
     render(){
+
+        const filteringPerson = this.state.person.filter(e => {
+            return e.firstName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        })
+
+
+        // smth.sort(function(a, b){ return a-b});
+
         return (
-            <div>
-                <table>
+            <div className="container">
+                <div className="mt-4">
+                <input className="form-control" type="test" name="search" value={this.state.search} onChange={this.updateSeach} placeholder="Searching" />
+                <table className="mt-3 table table-striped text-center table-bordered table-hover table-sm">
                     <thead>
                         <tr>
                             <td>ID CARD</td>
@@ -48,7 +61,7 @@ export default class GetMapping extends React.Component{
                     </thead>
                     <tbody>
                         {
-                            this.state.person.map(
+                            filteringPerson.map(
                                 persons => {
                                     return(
                                 <tr key={persons.idCard}>
@@ -56,10 +69,10 @@ export default class GetMapping extends React.Component{
                                     <td>{persons.firstName}</td>
                                     <td>{persons.lastName}</td>
                                     <td>{persons.address}</td>
-                                    <td><button onClick={()=>
+                                    <td><button className="btn btn-danger btn-sm mr-sm-2" onClick={()=>
                                         this.deletePeople(persons.idCard)}>delete</button>
-                                        <Link to={"/edit/"+persons.idCard}>
-                                        <button>edit</button>
+                                        <Link className="btn btn-info btn-sm mr-sm-2" to={"/edit/"+persons.idCard}>
+                                            Edit
                                         </Link>
                                         </td>
                                         
@@ -69,6 +82,7 @@ export default class GetMapping extends React.Component{
                         }
                     </tbody>
                 </table>
+                </div>
             </div>
         )
     }

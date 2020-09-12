@@ -1,29 +1,33 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+
 function Nav() {
 
     return(
-        <div>
+        <div className="container">
             <h3>
-                LOGO
+                UTech
             </h3>
-            <ul>
-                <Link to="/">
-                <li>
-                    Home
+            <ul className="nav nav-tabs justify-content-end" role="tablist">
+               
+                <li className="nav-item mr-sm-5">
+                    <Link className="nav-link"  to="/">
+                        Home
+                    </Link >
                 </li>
-                </Link>
-                <Link to="/list">
-                <li>
-                    List
+                
+                <li className="nav-item mr-sm-5">
+                    <Link className="nav-link "  to="/list">
+                        List
+                    </Link >
                 </li>
-                </Link>
-                <Link to="/adding">
-                <li>
-                    adding
+
+                <li className="nav-item mr-sm-5">
+                    <Link className="nav-link" to="/adding">
+                        Adding
+                    </Link >
                 </li>
-                </Link>
                 
             </ul>
         </div>

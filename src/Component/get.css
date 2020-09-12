@@ -1,0 +1,74 @@
+.app{
+    background: url(/img/background.jpg);
+}
+.nav ul{
+    float: right;
+    margin-right: 20px; 
+    padding: auto;
+}
+.nav h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 1800;
+    font-size: 30px;
+    float: left;
+    margin: 15px 30px ;
+    
+}
+.nav{
+    height: 70px;
+    background: rgb(50, 110, 35);
+    position: static;
+}
+
+.nav ul li{
+    padding: 3px 33px;
+    margin: 10px  20px 0;
+    display: inline-block;
+    list-style-type: none;
+    color: rgb(55, 45, 56);
+    font-weight: bold;
+    border: solid ;
+}
+.nav ul li:hover {
+    background: cornflowerblue;
+
+}
+
+
+
+
+
+
+.getMap{
+    width: 600px;
+}
+.getMap input{
+    height: 20px;
+    width: 230px;
+    border-radius: 7px;
+    background-color: teal;
+    color: black;
+}
+
+.table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+.table td{
+    border: rosybrown solid thin;
+    padding: 5px;
+    text-align: center;
+    padding: 4px 10px ;
+}
+
+.innerMap{
+    background-color: #526B6F;
+    position: absolute;
+    padding: 70px;
+    left: 25%;
+    top: 20%;
+}
+.innerMap tbody button {
+    background: #fff;
+}
